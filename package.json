@@ -1,0 +1,25 @@
+{
+  "name": "ecomp-lib",
+  "version": "1.0.0",
+  "description": "A common class library for eCompany ERP development",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "keywords": [],
+  "author": "Amit Gosai",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.3.5"
+  }
+}
