@@ -16,4 +16,5 @@ export const localStoreKeys = {
     isMobileScreenSize: "isMobileScreenSize", //Values determined by Flex Grid Media Query. 
     isTabletScreenSize: "isTabletScreenSize", //Values determined by Flex Grid Media Query. 
     isDesktopScreenSize: "isDesktopScreenSize", //Values determined by Flex Grid Media Query. 
+	selectedCompany: "selectedCompany", //Company currently selected by User. 
 }; 

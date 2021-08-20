@@ -105,4 +105,81 @@ export class Util {
     public static getRandomNumber(): string {
         return Date.now().toString() + Math.floor((Math.random() * 10000) + 1).toString();  
     }
+
+    public static getTrimmedString(stringValue: string, trimmedLength: number, includeDots:boolean = true) : string {
+        let retVal: string = stringValue; 
+
+        try {
+            if(stringValue.length > trimmedLength) {
+                retVal = stringValue.substr(0, trimmedLength); 
+            } else {
+                retVal = stringValue; 
+            }
+
+            if(includeDots) {
+                retVal = retVal.substr(0, retVal.length - 3); 
+                retVal = retVal + "..."; 
+            }
+        } catch (err) {
+            retVal = stringValue; 
+        } finally {
+            return retVal; 
+        }
+    }
+
+    public static searchArrayByKey(arrayList: any[], key: string): any | null | undefined {
+        let retVal: any | null | undefined; 
+        try {
+            for(var i=0; i < arrayList.length; i++) {
+                if(arrayList[i].key === key) {
+                    retVal = arrayList[i];
+                    break; 
+                }
+            }
+        } catch (err) {
+            //Do Nothing. 
+            retVal = null; 
+        } finally {
+            return retVal; 
+        }
+    }
+
+    public static removeArrayItemByKey(arrayList: any[], key: string): any | null | undefined {
+        let retVal: any | null | undefined; 
+
+        try {
+            retVal = arrayList; 
+            for(var i=0; i < arrayList.length; i++) {
+                if(arrayList[i].key === key) {
+                    retVal.splice(i, 1); 
+                    break; 
+                }
+            }
+        } catch (err) {
+            //Do Nothing. 
+            retVal = null; 
+            throw new Error("Error removing Array Item"); 
+        } finally {
+            return retVal; 
+        }
+    }
+
+    public static getItemValueByKey(arrayList: any[], key: string): any | null | undefined {
+        let retVal: any | null | undefined; 
+
+        try {
+            retVal = null; 
+            for(var i=0; i < arrayList.length; i++) {
+                if(arrayList[i].key === key) {
+                    retVal = arrayList[i].value; 
+                    break; 
+                }
+            }
+        } catch (err) {
+            retVal = null; 
+            throw new Error("Error while getting new value: "); 
+        } finally {
+            return retVal; 
+        }
+    }
 }

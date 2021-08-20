@@ -3,14 +3,15 @@ import { WhereParam } from './data';
 
 
 // Firebase Database Operations 
-export const FbDbOperations = {
+export const fbDbOps = {
     add: "add", 
     set: "set", 
     update: "update", 
     softdelete: "softdelete"
 }; 
 
-export const firebaseErrorCodes = {
+//Firebase Error Codes
+export const fbErrorCodes = {
     auth: {
         userNotFound: {
         code: "auth/user-not-found", 
@@ -52,15 +53,15 @@ export const firebaseErrorCodes = {
     }
 }; 
 
-export const FirebaseFunc = {
-    initializeFirestore: "initializeFirestore", 
-    getAppDetails: "getAppDetails", 
-    getUserDetails: "getUserDetails", 
-    updateUserDetails: "updateUserDetails", 
-    userEmailExists: "userEmailExists", 
-    addUserDetails: "addUserDetails", 
-    sendEmailOTP: "sendEmailOTP", 
-    verifyMailOTP: "verifyMailOTP"
+export const fbFunc = {
+    fnInitFirestore: "db-initFirestore", 
+    fnGetAppDetails: "app-getAppDetails", 
+    fnGetUserDetails: "users-getUserDetails", 
+    fnUpdateUserDetails: "users-updateUserDetails", 
+    fnUserEmailExists: "users-userEmailExists", 
+    fnAddUserDetails: "users-addUserDetails", 
+    fnSendEmailOTP: "comms-sendEmailOTP", 
+    fnVerifyMailOTP: "comms-verifyMailOTP"
 }
 
 export class FbWhereClause {
@@ -105,28 +106,28 @@ export class FbUtils {
         let _retVal: AppMessage | null | undefined = new AppMessage();  
 
         switch(errorObj.code) {
-            case firebaseErrorCodes.auth.userNotFound.code:
+            case fbErrorCodes.auth.userNotFound.code:
                 _retVal.innerError = errorObj; 
-                _retVal.messageTitle = firebaseErrorCodes.auth.userNotFound.title; 
-                _retVal.messageId = firebaseErrorCodes.auth.userNotFound.code; 
-                _retVal.messageString = firebaseErrorCodes.auth.userNotFound.message; 
-                _retVal.messageType = firebaseErrorCodes.auth.userNotFound.type; 
+                _retVal.messageTitle = fbErrorCodes.auth.userNotFound.title; 
+                _retVal.messageId = fbErrorCodes.auth.userNotFound.code; 
+                _retVal.messageString = fbErrorCodes.auth.userNotFound.message; 
+                _retVal.messageType = fbErrorCodes.auth.userNotFound.type; 
                 _retVal.isSuccess = false; 
                 break; 
-            case firebaseErrorCodes.auth.emailAlreadyInUse.code: 
+            case fbErrorCodes.auth.emailAlreadyInUse.code: 
                 _retVal.innerError = errorObj; 
-                _retVal.messageTitle = firebaseErrorCodes.auth.emailAlreadyInUse.title; 
-                _retVal.messageId = firebaseErrorCodes.auth.emailAlreadyInUse.code; 
-                _retVal.messageString = firebaseErrorCodes.auth.emailAlreadyInUse.message; 
-                _retVal.messageType = firebaseErrorCodes.auth.emailAlreadyInUse.type; 
+                _retVal.messageTitle = fbErrorCodes.auth.emailAlreadyInUse.title; 
+                _retVal.messageId = fbErrorCodes.auth.emailAlreadyInUse.code; 
+                _retVal.messageString = fbErrorCodes.auth.emailAlreadyInUse.message; 
+                _retVal.messageType = fbErrorCodes.auth.emailAlreadyInUse.type; 
                 _retVal.isSuccess = false; 
                 break; 
-            case firebaseErrorCodes.auth.wrongPassword.code: 
+            case fbErrorCodes.auth.wrongPassword.code: 
                 _retVal.innerError = errorObj; 
-                _retVal.messageTitle = firebaseErrorCodes.auth.wrongPassword.title; 
-                _retVal.messageId = firebaseErrorCodes.auth.wrongPassword.code; 
-                _retVal.messageString = firebaseErrorCodes.auth.wrongPassword.message; 
-                _retVal.messageType = firebaseErrorCodes.auth.wrongPassword.type; 
+                _retVal.messageTitle = fbErrorCodes.auth.wrongPassword.title; 
+                _retVal.messageId = fbErrorCodes.auth.wrongPassword.code; 
+                _retVal.messageString = fbErrorCodes.auth.wrongPassword.message; 
+                _retVal.messageType = fbErrorCodes.auth.wrongPassword.type; 
                 _retVal.isSuccess = false; 
                 break;
             default: 
