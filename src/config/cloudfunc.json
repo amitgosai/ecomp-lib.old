@@ -1,0 +1,22 @@
+{
+    "getPersonsByCompanyId": {
+        "id": "person-getPersonsByCompanyId", 
+        "funcName": "getPersonsByCompanyId", 
+        "funcDesc": "Returns Person details based on the Company ID provided", 
+        "funcType": "httpsCallable", 
+        "inputParams:": [
+            {"paramName": "companyId", "dataType": "string", "paramDesc": "Company ID for which details are required" }
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: Person[],  <br/> &emsp; error: Object, <br/>} <br/>"
+    }, 
+    "getPersonDetails": { 
+        "id": "person-getPersonDetails", 
+        "funcName": "<i>getPersonDetails():</i>", 
+        "funcDesc" : "Returns Person Details from database", 
+        "funcType":"httpsCallable", 
+        "inputParams": [
+            {"paramName": "personId", "dataType": "string", "paramDesc": "Person ID for which details are required"}
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: Person,  <br/> &emsp; error: Object, <br/>} <br/>"
+    }
+}

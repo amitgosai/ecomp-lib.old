@@ -8,7 +8,8 @@
         "strict": true, 
         "strictNullChecks": true,
         "lib": ["ES2015", "DOM"], 
-        "rootDir": "src"
+        "rootDir": "src", 
+        "resolveJsonModule": true
     }, 
     "include": ["src"],
     "exclude": ["node_modules", "**/__tests__/*", "dist"]

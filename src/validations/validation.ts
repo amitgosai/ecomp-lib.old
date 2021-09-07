@@ -24,6 +24,7 @@ export interface IAppMessage {
 export class AppValidations {
     constructor() { }
 
+    //Returns True if Email is Valid. 
     public static validateEmail(email: any) {
       var retVal = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return retVal.test(String(email).toLowerCase());
@@ -33,7 +34,7 @@ export class AppValidations {
     //No + sign or comma or digits in between. 
     //Has to be 10 digits. 
     public static validateMobile(mobile: any) {
-        var retVal = /^\d{1,14}$/; 
+        var retVal = /^\d{10,14}$/; 
 
         return retVal.test(mobile); 
     }

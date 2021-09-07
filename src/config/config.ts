@@ -22,36 +22,3 @@ export const SMSTxnTypes = {
 export const ExternalAPIUrls = {
 	IPify: "https://api64.ipify.org?format=json", 
 };
-
-export const eCompAdminSiteMap = {
-	Root: {
-		path: "/", 
-		name: "Home", 
-		nstLvl: 0,  
-        PageNotFound: {
-            path: "pagenotfound/", 
-            name: "Page Not Found", 
-            nstLvl: 1
-        }, 
-		Login: {
-			path: "login/", 
-			name: "Login", 
-			nstLvl: 1
-		},
-		Signup: {
-			path: "signup/", 
-			name: "Signup", 
-			nstLvl: 1
-		}, 
-		Admin: {
-			path: "admin/", 
-			name: "Admin",
-			nstLvl: 1, 
-			Dashboard: {
-				path: "dashboard/",
-				name: "Dashboard", 
-				nstLvl: 2
-			}
-		}
-	}
-}; 

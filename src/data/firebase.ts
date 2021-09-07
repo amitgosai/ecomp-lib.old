@@ -4,6 +4,7 @@ import { WhereParam } from './data';
 
 // Firebase Database Operations 
 export const fbDbOps = {
+    get: "get", 
     add: "add", 
     set: "set", 
     update: "update", 
@@ -61,7 +62,19 @@ export const fbFunc = {
     fnUserEmailExists: "users-userEmailExists", 
     fnAddUserDetails: "users-addUserDetails", 
     fnSendEmailOTP: "comms-sendEmailOTP", 
-    fnVerifyMailOTP: "comms-verifyMailOTP"
+    fnVerifyMailOTP: "comms-verifyMailOTP", 
+    fngetCompanyTypesDropDown: "company-getCompanyTypesDropDown", 
+    fnGetAllCompaniesDropDown: "company-getAllCompaniesDropDown", 
+    fnGetCompaniesList: "company-getCompaniesList", 
+    fngetUserScreenAccess: "security-getUserScreenAccess"
+}
+
+export interface IRetVal {
+    isSuccess: boolean; 
+    retCode: string; 
+    message: string; 
+    data: any; 
+    error: any; 
 }
 
 export class FbWhereClause {
