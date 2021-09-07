@@ -13,7 +13,7 @@ export const documentDb = {
     deletedOn: "deletedOn", 
     deletedBy: "deletedBy", 
     notes: "notes", 
-    rowOrder: "rowOrder" //To Order values for a small table like lookups ! 
+    rowOrder: "rowOrder" // To Order values for a small table like lookups ! 
   }, 
   persons: {
     collection: "persons", 
@@ -21,7 +21,7 @@ export const documentDb = {
       firstName: "firstName", 
       lastName: "lastName", 
       fullName: "fullName", 
-      fullNameLower: "fullNameLower", //Full Name in lower case for firestore queries. 
+      fullNameLower: "fullNameLower", // Full Name in lower case for firestore queries. 
       gender: "gender", 
       dateOfBirth: "dateOfBirth", 
       contactGroup: "contactGroup"
@@ -46,11 +46,11 @@ export const documentDb = {
   companies: {
     collection: "companies", 
     doc: {
-      publicId: "publicId", //Purely for security reasons. This will be provided in Dropdowns and end user cannot see actual company id. 
+      publicId: "publicId", // Purely for security reasons. This will be provided in Dropdowns and end user cannot see actual company id. 
       companyName: "companyName", 
       companyNameLower: "companyNameLower",
       companyType: "companyType", 
-      registrationNumber: "registrationNumber", //Company Identification Number OR CIN
+      registrationNumber: "registrationNumber", // Company Identification Number OR CIN
       dateOfIncorporation: "dateOfIncorporation", 
       taxIDs: "taxIDs", 
       websites: "websites", 
@@ -133,7 +133,7 @@ export const documentDb = {
       jobTitle: "jobTitle"
     }
   }, 
-  lkpPerCompAssociationTypes: { //Company And Person association Types, i.e. Owner, Customer, Employee, Vendor, etc. 
+  lkpPerCompAssociationTypes: { // Company And Person association Types, i.e. Owner, Customer, Employee, Vendor, etc. 
     collection: "lkpPerCompAssociationTypes", 
     doc: {
       ids: {
@@ -165,8 +165,8 @@ export const documentDb = {
     collection: "countries", 
     doc: {
       countryName: "countryName",
-      officialStateName: "officialStateName", //Repulican of India
-      sovereignty: "sovereignty", //United Kingdom, etc. 
+      officialStateName: "officialStateName", // Repulican of India
+      sovereignty: "sovereignty", // United Kingdom, etc. 
       alpha2Code: "alpha2Code", 
       isdCode: "isdCode", 
       flagIconImgPath: "flagIconImgPath", 
@@ -179,8 +179,8 @@ export const documentDb = {
       companyid: "companyId", 
       companyName: "companyName", 
       countryName: "countryName",
-      officialStateName: "officialStateName", //Repulican of India
-      sovereignty: "sovereignty", //United Kingdom, etc. 
+      officialStateName: "officialStateName", // Repulican of India
+      sovereignty: "sovereignty", // United Kingdom, etc. 
       alpha2Code: "alpha2Code", 
       isdCode: "isdCode", 
       flagIconImgPath: "flagIconImgPath", 
@@ -487,6 +487,7 @@ export class WhereParam {
     }
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class DbFields implements IdbFields {
   public id: string = ""; 
   public createdOn?: Date | null | undefined; 

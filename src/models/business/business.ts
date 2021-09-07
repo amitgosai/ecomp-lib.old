@@ -1,3 +1,4 @@
+// tslint:disable no-string-literal
 import { DbFields, IdbFields } from '../../data/data';
 import { Util } from '../../util/util';
 import { AppValidations } from '../../validations/validation';
@@ -63,6 +64,7 @@ export class TaxID extends DbFields implements ITaxID {
     }
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class JobTitle extends DbFields implements IJobTitle {
     public companyId: string = ""; 
     public company?: Company | null | undefined; 
@@ -96,11 +98,13 @@ export class JobTitle extends DbFields implements IJobTitle {
     }
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class CompanyTypes extends DbFields implements ICompanyTypes {
     constructor() { super(); }
     public companyType: string = ""; 
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class Company extends DbFields implements ICompany {
     public publicId: string = ""; 
     public companyLogo?: string | null | undefined; 

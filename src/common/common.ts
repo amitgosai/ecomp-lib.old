@@ -91,12 +91,13 @@ export class ScreenSize implements IScreenSize {
   }
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class App extends DbFields implements IApp {
   constructor() { super(); }
   public appName: string = ""; 
   public tagLine: string | null | undefined; 
 }
-
+// tslint:disable-next-line: max-classes-per-file
 export class AppResource extends DbFields implements IAppResource {
   public appId: string = ""; 
   public resourceName: string = ""; 

@@ -1,3 +1,5 @@
+// tslint:disable max-classes-per-file
+// tslint:disable no-string-literal
 import { AppResource, IAppResource } from "../common/common";
 import { DbFields, Idb, IdbFields } from "../data/data";
 import { Person } from "../models/person/person";
@@ -302,44 +304,43 @@ export class ScreenAccess extends DbFields implements IScreenAccess {
         this.elementAccess?.push(elementAccess); 
     }
 
-    //To find if user has access to specific screen element. 
+    // To find if user has access to specific screen element. 
     public hasElementViewAccess(elementId: string): boolean {
-        var retVal = true; //Default to True. 
+        let retVal = true; // Default to True. 
 
         try {
             if(this.elementAccess) {
-                for(var i=0; i < this.elementAccess.length; i++) {
-                    if(this.elementAccess[i].elementId === elementId) {
-                        retVal = this.elementAccess[i].view; 
+                for(const element of this.elementAccess) {
+                    if(element.elementId === elementId) {
+                        retVal = element.view; 
                         break; 
                     }
                 }
             }
-        } catch (err) {
-            //set Return value to false. 
-            retVal = false; 
-        } finally {
             return retVal; 
+        } catch (err) {
+            // set Return value to false. 
+            return retVal = false; 
         }
     }
 
-    //To find if user has access to specific screen element. 
+    // To find if user has access to specific screen element. 
     public isElementEnabled(elementId: string): boolean {
-        var retVal = true; 
+        let retVal = true; 
 
         try {
             if(this.elementAccess) {
-                for(var i=0; i < this.elementAccess.length; i++) {
-                    if(this.elementAccess[i].elementId === elementId) {
-                        retVal = this.elementAccess[i].enabled; 
+                for(const element of this.elementAccess) {
+                    if(element.elementId === elementId) {
+                        retVal = element.enabled; 
                         break; 
                     }
                 }
             }
+            return retVal; 
         } catch (err) {
-            //set Return value to false. 
+            // set Return value to false. 
             retVal = false; 
-        } finally {
             return retVal; 
         }
     }
@@ -348,7 +349,7 @@ export class ScreenAccess extends DbFields implements IScreenAccess {
     {
         super(); 
         if(objScrAcc) {
-            Util.setCommonDbOjectProps(this, objScrAcc); //Set All the default properties. 
+            Util.setCommonDbOjectProps(this, objScrAcc); // Set All the default properties. 
             if(objScrAcc["appId"]) {
                 this.appId = objScrAcc["appId"]; 
             }

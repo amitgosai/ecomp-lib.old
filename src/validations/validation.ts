@@ -1,3 +1,4 @@
+// tslint:disable max-classes-per-file
 import { responseCodes } from '../config/config'; 
 
 export const ErrorType = {
@@ -22,25 +23,23 @@ export interface IAppMessage {
 }
 
 export class AppValidations {
-    constructor() { }
-
-    //Returns True if Email is Valid. 
+    // Returns True if Email is Valid. 
     public static validateEmail(email: any) {
-      var retVal = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const retVal = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return retVal.test(String(email).toLowerCase());
     }
 
-    //To check if the mobile number is valid. 
-    //No + sign or comma or digits in between. 
-    //Has to be 10 digits. 
+    // To check if the mobile number is valid. 
+    // No + sign or comma or digits in between. 
+    // Has to be 10 digits. 
     public static validateMobile(mobile: any) {
-        var retVal = /^\d{10,14}$/; 
+        const retVal = /^\d{10,14}$/; 
 
         return retVal.test(mobile); 
     }
 
     public static isNullOrEmpty(value: any) {
-        var _retVal: boolean = false; 
+        let _retVal: boolean = false; 
 
         if(value === null || value === undefined) {
             _retVal = true; 
@@ -48,7 +47,7 @@ export class AppValidations {
             if(value === null || value === undefined || value === 'null' || value === 'undefined' || value === '') {
             _retVal = true; 
             } else {
-            if(value.trim() == '') {
+            if(value.trim() === '') {
                 _retVal = true; 
             }
             }
@@ -68,7 +67,7 @@ export class AppValidations {
             _retVal = error.toString(); 
         } else if(typeof error === "number" || error instanceof Number) {
             _retVal = error.toString(); 
-        } else if (typeof error == "boolean" || error instanceof Boolean) {
+        } else if (typeof error === "boolean" || error instanceof Boolean) {
             _retVal = error; 
         } else {
             _retVal = JSON.stringify(error); 
@@ -103,43 +102,41 @@ export class AppMessage implements IAppMessage  {
     public innerMessageFunction?: string; 
     public innerErrorMessage?: string; 
     
-    constructor()
-    constructor(error?:any)
-    constructor(messageString?: string)
-    constructor(messageType?:string)
-    constructor(messageTitle?:string, messageString?:string)
-    constructor(messageTitle?:string, messageString?: string, messageType?:string)
-    constructor(messageString?:string, error?:any)
-    constructor(messageTitle?:string, messageString?:string, error?:any)
-    constructor(messageTitle?:string, messageString?:string, error?:any, messageType?:string)
-    constructor(messageTitle?:string, messageString?:string, error?:any, messageType?:string, isSuccess?:boolean)
-    constructor(messageId?:string, messageTitle?:string, messageString?: string, messageType?: string, isSuccess?:boolean)
-    constructor(messageTitle?: string, messageString?: string, messageType?: string, error?:any, isSuccess?:boolean) 
-    constructor(messageId?:string, messageTitle?:string, messageString?: string, messageType?: string, error?:any, isSuccess?:boolean){
-      if(messageId === null || messageId == undefined || messageId === 'undefined' || messageId == '') {
+    constructor(messageString?: string | any) // Either Message OR Error. 
+    constructor(messageString?: string, error?: any | string, messageType?: string, messageId?: string, isSuccess?: boolean) // Message String Along with Error Object OR Error Title.
+    {
+
+      if(messageString) {
+        if(typeof messageString === "object") { // If Message String is object, then it's an error object. 
+          this._innerError = messageString; 
+        } else { // It's string. 
+          this.messageString = messageString; 
+        }
+      } else {
+        this.messageString = "Error Occurred"; 
+      }
+
+      if(error && typeof error === "object") { // If we have object of Error, then update the inner error. 
+        this._innerError = error; 
+        this.innerErrorMessage = AppValidations.getErrorString(error); 
+      } else if (error) { // Else update it as Message Title. 
+        this.messageTitle = error; 
+      } else { // Else update the Default title. 
+        this.messageTitle = "Error"; 
+      }
+
+      if(messageId === null || messageId === undefined || messageId === 'undefined' || messageId === '') {
         this.messageId = responseCodes.UNHANDLED_ERROR; 
       } else {
         this.messageId = messageId; 
       }
-      if(messageTitle === 'undefined' || messageTitle === null || messageTitle === '') {
-        this.messageTitle = 'Error'; 
-      } else {
-        this.messageTitle = messageTitle; 
-      }
-      if(messageString === 'undefined' || messageString === null || messageString === '') {
-        this.messageString = 'Error Occurred'; 
-      } else {
-        this.messageString = messageString; 
-      }
+      
       if(messageType === null || messageType === 'undefined' || messageType === '') {
         messageType = ErrorType.Error; 
       } else {
         this.messageType = messageType; 
       }
-      if(!(error === null || error == undefined)) {
-        this._innerError = error; 
-        this.innerErrorMessage = AppValidations.getErrorString(error);
-      }
+      
       if(isSuccess === null) {
         this.isSuccess = false; 
       } else {

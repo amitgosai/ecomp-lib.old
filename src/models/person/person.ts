@@ -1,3 +1,5 @@
+// tslint:disable no-string-literal
+// tslint:disable max-classes-per-file
 import { DbFields, IdbFields } from '../../data/data'; 
 import { IClassDescription } from '../../security/security';
 import { Util } from '../../util/util';
@@ -147,7 +149,7 @@ export interface IPersonCompanyAssociation extends IdbFields {
     sharePercent?: number | null | undefined; 
 }
 
-//Depreciated
+// Depreciated
 /*
 export interface IContact {
     personOrCompany: string //Person OR Company
@@ -184,9 +186,9 @@ export class Person extends DbFields implements IPerson {
     constructor(person?: any)
     constructor(person?: string, lastName?: string, gender?: tGender, dob?: Date, contGroup?: string[]) {
         super();
-        //Check on the Arguments here. 
+        // Check on the Arguments here. 
         if(person && typeof person === "object") {
-            //Then we have the person object with us. 
+            // Then we have the person object with us. 
             if(person["id"]) {
                 this.id = person["id"]; 
             }
@@ -214,7 +216,7 @@ export class Person extends DbFields implements IPerson {
                 this.notes = person["notes"]; 
             }
         } else {
-            if(typeof person === "string" && !AppValidations.isNullOrEmpty(person)) { //Then take it as first Name. 
+            if(typeof person === "string" && !AppValidations.isNullOrEmpty(person)) { // Then take it as first Name. 
                 this.firstName = person!;
                 this.fullName = this.firstName; 
             }
@@ -308,7 +310,7 @@ export class Email extends DbFields implements IContactEmail {
     constructor(contact?: ContactType, contactId?: string, email?:string, emailTypeId?: string, emailType?: tEmailTypes, isPrimary?: boolean, isVerified?: boolean){ 
         super(); 
         if(contact && typeof contact === "object") {
-            Util.setCommonDbOjectProps(this, contact); //Set All the default properties. 
+            Util.setCommonDbOjectProps(this, contact); // Set All the default properties. 
             if(!AppValidations.isNullOrEmpty(contact["personId"])) {
                 this.personId = contact["personId"]; 
             }
@@ -492,7 +494,6 @@ export class Address extends DbFields implements IContactAddress {
     public lat?: number | null | undefined; 
     public long?: number | null | undefined; 
 
-    constructor()
     constructor(contact?: any) 
     constructor(contact?: ContactType, contactId?: string, addressLine1?: string, country?: string, state?: string, city?: string, zipCode?: string, lat?: number, long?: number)
     { 
@@ -677,7 +678,7 @@ export class PersonCompanyAssociation extends DbFields implements IPersonCompany
     }
 }
 
-//Deprecated
+// Deprecated
 /*
 export class Contact extends DbFields implements IContact {
     public personOrCompany: string = "Person"; //Default to Person. 

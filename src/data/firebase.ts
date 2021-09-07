@@ -1,3 +1,5 @@
+// tslint:disable max-classes-per-file
+
 import { AppMessage, ErrorType } from '../validations/validation';
 import { WhereParam } from './data'; 
 
@@ -11,7 +13,7 @@ export const fbDbOps = {
     softdelete: "softdelete"
 }; 
 
-//Firebase Error Codes
+// Firebase Error Codes
 export const fbErrorCodes = {
     auth: {
         userNotFound: {
@@ -80,8 +82,6 @@ export interface IRetVal {
 export class FbWhereClause {
     private _params: WhereParam[] = []; 
   
-    constructor() { }
-  
     public addClause(columnName: string, operator: string, value: any) {
         this._params.push(new WhereParam(columnName, operator, value)); 
     }
@@ -91,7 +91,7 @@ export class FbWhereClause {
     }
   
     public clearParams() {
-        //Let's clean the array. Slow, but effective. 
+        // Let's clean the array. Slow, but effective. 
         this._params.splice(0, this._params.length);
     }
   
