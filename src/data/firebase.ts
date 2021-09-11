@@ -3,7 +3,6 @@
 import { AppMessage, ErrorType } from '../validations/validation';
 import { WhereParam } from './data'; 
 
-
 // Firebase Database Operations 
 export const fbDbOps = {
     get: "get", 
@@ -27,16 +26,37 @@ export const fbErrorCodes = {
             code: "auth/email-already-in-use",
             errorCode: "auth/email-already-in-use", 
             title: "User Name already taken", 
-            message: "The email address already in use by another account.",
+            message: "The email address already in use by another account",
             type: ErrorType.Info
-        }, 
+        },
+        invalidPhoneNumber: {
+            code: "auth/invalid-phone-number", 
+            errorCode: "auth/invalid-phone-number",
+            title: "Phone number invalid",
+            message: "The phone number must be E.164 standard compliant",
+            type: ErrorType.Info
+        },
+        phoneNumberAlreadyExists: {
+            code: "auth/phone-number-already-exists", 
+            errorCode: "auth/phone-number-already-exists", 
+            title: "Phone Number already taken", 
+            message: "Phone number already in use by another account",
+            type: ErrorType.Info
+        },
         wrongPassword: {
             code: "auth/wrong-password",
             errorCode: "auth/wrong-password",
             title: "Invalid Login", 
             message: "Incorrect Password", 
             type: ErrorType.Info
-        } 
+        }, 
+        networkRequestFailed: {
+            code: "auth/network-request-failed", 
+            errorCode: "auth/network-request-failed", 
+            title: "Network unavailable", 
+            message: "Network unavailable", 
+            type: ErrorType.Info
+        }
     }, 
     storage: {
         Unauthorized: {
@@ -115,38 +135,64 @@ export class FbWhereClause {
 }
 
 export class FbUtils {
+
     public static getFbError(errorObj: any): AppMessage | null | undefined {
         let _retVal: AppMessage | null | undefined = new AppMessage();  
 
-        switch(errorObj.code) {
-            case fbErrorCodes.auth.userNotFound.code:
-                _retVal.innerError = errorObj; 
-                _retVal.messageTitle = fbErrorCodes.auth.userNotFound.title; 
-                _retVal.messageId = fbErrorCodes.auth.userNotFound.code; 
-                _retVal.messageString = fbErrorCodes.auth.userNotFound.message; 
-                _retVal.messageType = fbErrorCodes.auth.userNotFound.type; 
-                _retVal.isSuccess = false; 
-                break; 
-            case fbErrorCodes.auth.emailAlreadyInUse.code: 
-                _retVal.innerError = errorObj; 
-                _retVal.messageTitle = fbErrorCodes.auth.emailAlreadyInUse.title; 
-                _retVal.messageId = fbErrorCodes.auth.emailAlreadyInUse.code; 
-                _retVal.messageString = fbErrorCodes.auth.emailAlreadyInUse.message; 
-                _retVal.messageType = fbErrorCodes.auth.emailAlreadyInUse.type; 
-                _retVal.isSuccess = false; 
-                break; 
-            case fbErrorCodes.auth.wrongPassword.code: 
-                _retVal.innerError = errorObj; 
-                _retVal.messageTitle = fbErrorCodes.auth.wrongPassword.title; 
-                _retVal.messageId = fbErrorCodes.auth.wrongPassword.code; 
-                _retVal.messageString = fbErrorCodes.auth.wrongPassword.message; 
-                _retVal.messageType = fbErrorCodes.auth.wrongPassword.type; 
-                _retVal.isSuccess = false; 
-                break;
-            default: 
-                _retVal = null; 
+        if(errorObj && typeof errorObj === "object" && errorObj.hasOwnProperty("code")) {
+            switch(errorObj.code) {
+                case fbErrorCodes.auth.userNotFound.code:
+                    _retVal.innerError = errorObj; 
+                    _retVal.messageTitle = fbErrorCodes.auth.userNotFound.title; 
+                    _retVal.messageId = fbErrorCodes.auth.userNotFound.code; 
+                    _retVal.messageString = fbErrorCodes.auth.userNotFound.message; 
+                    _retVal.messageType = fbErrorCodes.auth.userNotFound.type; 
+                    _retVal.isSuccess = false; 
+                    break; 
+                case fbErrorCodes.auth.emailAlreadyInUse.code: 
+                    _retVal.innerError = errorObj; 
+                    _retVal.messageTitle = fbErrorCodes.auth.emailAlreadyInUse.title; 
+                    _retVal.messageId = fbErrorCodes.auth.emailAlreadyInUse.code; 
+                    _retVal.messageString = fbErrorCodes.auth.emailAlreadyInUse.message; 
+                    _retVal.messageType = fbErrorCodes.auth.emailAlreadyInUse.type; 
+                    _retVal.isSuccess = false; 
+                    break; 
+                case fbErrorCodes.auth.invalidPhoneNumber.code:
+                    _retVal.innerError = errorObj; 
+                    _retVal.messageTitle = fbErrorCodes.auth.invalidPhoneNumber.title; 
+                    _retVal.messageId = fbErrorCodes.auth.invalidPhoneNumber.code; 
+                    _retVal.messageString = fbErrorCodes.auth.invalidPhoneNumber.message; 
+                    _retVal.messageType = fbErrorCodes.auth.invalidPhoneNumber.type; 
+                    _retVal.isSuccess = false; 
+                    break; 
+                case fbErrorCodes.auth.phoneNumberAlreadyExists.code:
+                    _retVal.innerError = errorObj; 
+                    _retVal.messageTitle = fbErrorCodes.auth.phoneNumberAlreadyExists.title; 
+                    _retVal.messageId = fbErrorCodes.auth.phoneNumberAlreadyExists.code; 
+                    _retVal.messageString = fbErrorCodes.auth.phoneNumberAlreadyExists.message; 
+                    _retVal.messageType = fbErrorCodes.auth.phoneNumberAlreadyExists.type; 
+                    _retVal.isSuccess = false; 
+                    break; 
+                case fbErrorCodes.auth.wrongPassword.code: 
+                    _retVal.innerError = errorObj; 
+                    _retVal.messageTitle = fbErrorCodes.auth.wrongPassword.title; 
+                    _retVal.messageId = fbErrorCodes.auth.wrongPassword.code; 
+                    _retVal.messageString = fbErrorCodes.auth.wrongPassword.message; 
+                    _retVal.messageType = fbErrorCodes.auth.wrongPassword.type; 
+                    _retVal.isSuccess = false; 
+                    break;
+                case fbErrorCodes.auth.networkRequestFailed.code:  
+                    _retVal.innerError = errorObj; 
+                    _retVal.messageTitle = fbErrorCodes.auth.networkRequestFailed.title; 
+                    _retVal.messageId = fbErrorCodes.auth.networkRequestFailed.code; 
+                    _retVal.messageString = fbErrorCodes.auth.networkRequestFailed.message; 
+                    _retVal.messageType = fbErrorCodes.auth.networkRequestFailed.type; 
+                    _retVal.isSuccess = false; 
+                    break;
+                default: 
+                    _retVal = null; 
+            }
         }
-
         return _retVal; 
     }
 }

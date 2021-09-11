@@ -25,6 +25,7 @@ export const EmailTypes = {
 export type tEmailTypes = "Personal" | "Work" | "Sales" | "Support" | "Tech Support" | "Customer Care" | "Other"; 
 
 export const PhoneTypes = {
+    Personal: "Personal",
     Mobile: "Mobile", 
     Home: "Home", 
     Work: "Work", 
@@ -36,7 +37,7 @@ export const PhoneTypes = {
     Pager: "Pager", 
     Other: "Other"
 }
-export type tPhoneTypes = "Mobile" | "Home" | "Work" | "Customer Care" | "Sales" | "Main" | "Work fax" | "Home fax" | "Pager" | "Other"; 
+export type tPhoneTypes = "Personal" | "Mobile" | "Home" | "Work" | "Customer Care" | "Sales" | "Main" | "Work fax" | "Home fax" | "Pager" | "Other"; 
 
 export const SocialMediaTypes = {
     LinkedIn: "LinkedIn", 

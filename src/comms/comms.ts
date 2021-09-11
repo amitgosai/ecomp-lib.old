@@ -33,3 +33,13 @@ export const axesSupportMailConf = {
         pass: "CmnPwd@1520"
     }
 }; 
+
+export interface IHttpHeaders {
+    header: string; 
+    value: string | string[];
+}
+
+export interface IHttpParams {
+    param: string; 
+    value: string | number | boolean; 
+}

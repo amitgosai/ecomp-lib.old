@@ -1,9 +1,78 @@
 {
+    "getUserDetails": {
+        "id": "users-getUserDetails", 
+        "funcName": "getUserDetails", 
+        "funcDesc": "Returns User details based on the User ID provided", 
+        "funcType": "https.OnRequest", 
+        "inputParams:": [
+            {"paramName": "userId", "dataType": "string", "paramDesc": "User ID for which details are required" }
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: User[],  <br/> &emsp; error: Object, <br/>} <br/>"
+    }, 
+    "createUser": {
+        "id": "users-createUser", 
+        "funcName": "createUser", 
+        "funcDesc": "Creates user based on the POST parameters passed", 
+        "funcType": "https.OnRequest", 
+        "inputParams:": [
+            {"paramName": "fullName", "dataType": "string", "paramDesc": "Full Name of the person. <b>Will be used as Display Name</b>"},
+            {"paramName": "companyId", "dataType": "string", "paramDesc": "Company Id for which the user is to be associated. If there is no existing company ID, this will be blank. In that case, a new company will be created and the user will be associated with it."},
+            {"paramName": "companyName", "dataType": "string", "paramDesc": "Name of the company. This will be either selected from a drop down by user OR will be entered as a free text. If free text, then a new company with same name will be created."},
+            {"paramName": "appId", "dataType": "string", "paramDesc": "Application from which the request is being made. This will be configured in the Application side and will have unique App ID stored in database."},
+            {"paramName": "email", "dataType": "string", "paramDesc": "Email to be registered for this user"},
+            {"paramName": "emailVerified", "dataType": "string", "paramDesc": "Is Email Pre-Verified via OTP? (I.e. At the time of registration?)"},
+            {"paramName": "countryCode", "dataType": "string", "paramDesc": "Country Code of the Mobile number"},
+            {"paramName": "phone", "dataType": "string", "paramDesc": "Phone number. <b>This will have to be mobile in case of registration</b>"},
+            {"paramName": "phoneVerified", "dataType": "string", "paramDesc": "Is Phone Pre-Verified via OTP? (I.e. At the time of registration?)"},
+            {"paramName": "password", "dataType": "string", "paramDesc": "Password of the user that needs to be created"},
+            {"paramName": "device", "dataType": "string", "paramDesc": "<b>Optional</b> A device object <div style='color: blue;'>{deviceIP: string, deviceName: string, deviceOS: string, deviceID: string}</div>"}
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: User[],  <br/> &emsp; error: Object, <br/>} <br/>"
+    },
+    "verifyOTP": {
+        "id": "users-verifyOTP", 
+        "funcName": "verifyOTP", 
+        "funcDesc": "To Verify OTP of any transaction.", 
+        "funcType": "https.OnRequest", 
+        "inputParams:": [
+            {"paramName": "otp", "dataType": "string", "paramDesc": "OTP"}, 
+            {"paramName": "receiverId", "dataType": "string", "paramDesc": "Receiver Id (Email OR Mobile Number)"}
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: User[],  <br/> &emsp; error: Object, <br/>} <br/>"
+    },
+    "sendEmailOTP": {
+        "id": "comms-sendEmailOTP", 
+        "funcName": "sendEmailOTP", 
+        "funcDesc": "To send Email based OTP to customers", 
+        "funcType": "https.OnRequest", 
+        "inputParams:": [
+            {"paramName": "fromMail", "dataType": "string", "paramDesc": "Sender email address"}, 
+            {"paramName": "toMail", "dataType": "string", "paramDesc": "Receiver email address"},
+            {"paramName": "customerName", "dataType": "string", "paramDesc": "Name of the Customer to whom the mail needs to be sent."},
+            {"paramName": "mailSubject", "dataType": "string", "paramDesc": "Subject line of the email to be sent"},
+            {"paramName": "displaySenderName", "dataType": "string", "paramDesc": "What name to be displayed when sending email in the From field"},
+            {"paramName": "mailTemplateId", "dataType": "string", "paramDesc": "Email Template to be used"},
+            {"paramName": "customerReplaceText", "dataType": "string", "paramDesc": "Generic text to be replaced with Customer Name"},
+            {"paramName": "otpReplaceText", "dataType": "string", "paramDesc": "Generic text to be replaced with OTP value"}
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: User[],  <br/> &emsp; error: Object, <br/>} <br/>"
+    },
+    "userExists": {
+        "id": "users-userExists", 
+        "funcName": "userExists", 
+        "funcDesc": "Checks if user exists based on the Email & Mobile Number", 
+        "funcType": "https.OnRequest", 
+        "inputParams:": [
+            {"paramName": "email", "dataType": "string", "paramDesc": "Email to be verified"}, 
+            {"paramName": "phone", "dataType": "string", "paramDesc": "Mobile Number to be verified"}
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: User[],  <br/> &emsp; error: Object, <br/>} <br/>"
+    },
     "getPersonsByCompanyId": {
         "id": "person-getPersonsByCompanyId", 
         "funcName": "getPersonsByCompanyId", 
         "funcDesc": "Returns Person details based on the Company ID provided", 
-        "funcType": "httpsCallable", 
+        "funcType": "https.OnRequest", 
         "inputParams:": [
             {"paramName": "companyId", "dataType": "string", "paramDesc": "Company ID for which details are required" }
         ], 
@@ -13,9 +82,19 @@
         "id": "person-getPersonDetails", 
         "funcName": "<i>getPersonDetails():</i>", 
         "funcDesc" : "Returns Person Details from database", 
-        "funcType":"httpsCallable", 
+        "funcType":"https.OnRequest", 
         "inputParams": [
             {"paramName": "personId", "dataType": "string", "paramDesc": "Person ID for which details are required"}
+        ], 
+        "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: Person,  <br/> &emsp; error: Object, <br/>} <br/>"
+    },
+    "getAllCompaniesDropDown": { 
+        "id": "company-getAllCompaniesDropDown", 
+        "funcName": "<i>getAllCompaniesDropDown():</i>", 
+        "funcDesc" : "Returns all {CompanyId, CompanyName} from database irrespective of user or company", 
+        "funcType":"https.OnCall", 
+        "inputParams": [
+            {"paramName": "N/A", "dataType": "N/A", "paramDesc": "N/A"}
         ], 
         "output": "{<br/>&emsp; isSuccess: boolean, <br/>&emsp; respCode: string, <br/> &emsp; message: string, <br/> &emsp; data: Person,  <br/> &emsp; error: Object, <br/>} <br/>"
     }
